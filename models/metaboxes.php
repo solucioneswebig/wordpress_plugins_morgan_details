@@ -20,21 +20,23 @@ function cmb2_sample_metaboxes() {
 		// 'closed'     => true, // Keep the metabox closed by default
 	) );
 
-	// Regular text field
-	$cmb->add_field( array(
+    $cmb->add_field( array(
 		'name'       => __( 'Presupuesto', 'cmb2' ),
-		'desc'       => __( 'Valor que puede ofrecer', 'cmb2' ),
-		'id'         => 'precio-servicio',
-		'type'       => 'text',
-		'show_on_cb' => 'cmb2_hide_if_no_cats', // function should return a bool value
-		// 'sanitization_cb' => 'my_custom_sanitization', // custom sanitization callback parameter
-		// 'escape_cb'       => 'my_custom_escaping',  // custom escaping callback parameter
-		// 'on_front'        => false, // Optionally designate a field to wp-admin only
-		// 'repeatable'      => true,
-	) );
+		'desc'       => __( 'Valor que maneja para esta solicitud', 'cmb2' ),
+        'id'               => 'precio-servicio',
+        'type'             => 'select',
+        'show_option_none' => false,
+        'default'    => 'custom',
+        'options'          => array(
+            '1'     => __( '0 - 50', 'cmb2' ),
+            '2'     => __( '50 - 150', 'cmb2' ),
+            '3'     => __( '150 - 300', 'cmb2' ),
+            '4'     => __( '300 +', 'cmb2' ),
+        ),
+    ) );
 
     $cmb->add_field( array(
-        'name' => 'Galeria',
+        'name' => 'Documentos o Imagenes',
         'desc' => '',
         'id'   => 'galeria-servicios',
         'type' => 'file_list',

@@ -24,7 +24,7 @@ function ga_campos_formulario() {
     }else{
         $title = "";
         $content = "";
-        $terms_string = array();
+        $terms_string = array("0"=>"nada");
         $presupuesto = "";
         $galeria = ""; 
     }
@@ -44,13 +44,23 @@ function ga_campos_formulario() {
         ),
      ));
 
-     $cmb->add_field( array(
-        'name'       => __( 'Categorias del servicio', 'cmb2' ),
-        'id'         => 'submitted_categories',
-        'type'       => 'taxonomy_multicheck',
-        'default'    => $terms_string,
-        'taxonomy'   => 'categoria_servicios', // Taxonomy Slug
-        ) );
+
+
+    $cmb->add_field( array(
+        'name'           => 'Categorias del servicio',
+        'id'             => 'submitted_categories',
+        'taxonomy'       => 'categoria_servicios', //Enter Taxonomy Slug
+        'type'           => 'taxonomy_select',
+        'default'        => $terms_string[0],
+        'show_option_none' => false,
+        'remove_default' => 'true', // Removes the default metabox provided by WP core.
+        // Optionally override the args sent to the WordPress get_terms function.
+        'query_args' => array(
+            // 'orderby' => 'slug',
+            // 'hide_empty' => true,
+        ),
+    ) );
+
 
     $cmb->add_field( array(
         'name' => 'Nombre Servicio',
@@ -72,22 +82,23 @@ function ga_campos_formulario() {
         'default' => $content
     ));
 
-    	// Regular text field
-	$cmb->add_field( array(
+    $cmb->add_field( array(
 		'name'       => __( 'Presupuesto', 'cmb2' ),
-		'desc'       => __( 'Valor que puede ofrecer', 'cmb2' ),
-		'id'         => 'precio-servicio',
-        'type'       => 'text',
+		'desc'       => __( 'Valor que maneja para esta solicitud', 'cmb2' ),
+        'id'               => 'precio-servicio',
+        'type'             => 'select',
+        'show_option_none' => false,
         'default'    => $presupuesto,
-		'show_on_cb' => 'cmb2_hide_if_no_cats', // function should return a bool value
-		// 'sanitization_cb' => 'my_custom_sanitization', // custom sanitization callback parameter
-		// 'escape_cb'       => 'my_custom_escaping',  // custom escaping callback parameter
-		// 'on_front'        => false, // Optionally designate a field to wp-admin only
-		// 'repeatable'      => true,
-	) );
+        'options'          => array(
+            '1'     => __( '0 - 50', 'cmb2' ),
+            '2'     => __( '50 - 150', 'cmb2' ),
+            '3'     => __( '150 - 300', 'cmb2' ),
+            '4'     => __( '300 +', 'cmb2' ),
+        ),
+    ) );
 
     $cmb->add_field( array(
-        'name' => 'Galeria',
+        'name' => 'Documentos o Imagenes',
         'desc' => '',
         'id'   => 'galeria-servicios',
         'default' => $galeria,
@@ -96,15 +107,13 @@ function ga_campos_formulario() {
         // 'query_args' => array( 'type' => 'image' ), // Only images attachment
         // Optional, override default text strings
         'text' => array(
-            'add_upload_files_text' => 'Cargar imagenes', // default: "Add or Upload Files"
+            'add_upload_files_text' => 'Cargar archivo', // default: "Add or Upload Files"
             'remove_image_text' => 'Eliminar', // default: "Remove Image"
-            'file_text' => 'Imagen', // default: "File:"
+            'file_text' => 'Archivo', // default: "File:"
             'file_download_text' => 'Descargar', // default: "Download"
             'remove_text' => 'Borrar', // default: "Remove"
         ),
     ) );
-
-
 
 }
 add_action('cmb2_init', 'ga_campos_formulario');

@@ -22,7 +22,7 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
 
     ob_start();
 
-    $url = get_site_url()."/home/";
+    $url = get_site_url()."/mi-cuenta/";
 
     if(is_user_logged_in()){
 
@@ -35,7 +35,7 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
 
     }elseif(isset($_GET["slug"]) && $_GET["slug"] == "add_new"){
 
-        echo '<h1>Añadir Servicio</h1>';
+        echo '<h1>Publicar nueva solicitud</h1>';
 
         echo '<a href="'.$url.'" class="btn btn-warning mb-3"><i class="fa fa-list"></i> Volver a la lista</a>';
 
@@ -43,13 +43,13 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
         
     }elseif(isset($_GET["slug"]) && $_GET["slug"] == "edit_post"){
 
-        echo '<h1>Editar Servicio</h1>';
+        echo '<h1>Editar solicitud</h1>';
 
         echo '<a href="'.$url.'" class="btn btn-warning mb-3"><i class="fa fa-list"></i> Volver a la lista</a> <a href="'.$url.'?slug=add_new" class="btn btn-success mb-3"><i class="fa fa-plus"></i> Añadir nuevo</a>';
 
         echo do_shortcode('[form_service]');
     }else{
-        echo '<h1>Lista de servicios</h1>';
+        echo '<h1>Lista de solicitudes</h1>';
 
         echo '<a href="'.$url.'?slug=add_new" class="btn btn-success mb-5"><i class="fa fa-plus"></i> Añadir nuevo</a>';
 
@@ -60,6 +60,9 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
     }
 	return ob_get_clean();
 }
+
+
+
 add_shortcode( 'service_front_admin', 'wds_do_frontend_form_submission_shortcode' );
 
 /**
