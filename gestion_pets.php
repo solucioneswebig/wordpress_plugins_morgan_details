@@ -66,9 +66,9 @@ define('TABLA_EMPLEADOS' , $wpdb->prefix . $prefix_plugin_gn . 'perfil_empleado'
 
 
 
-function design_styles(){
+function design_styles_pets(){
 
-	wp_enqueue_style( 'mtb-style-general', GP_PLUGIN_DIR_URL . 'assets/css/style.css', false );
+	//wp_enqueue_style( 'mtb-style-general', GP_PLUGIN_DIR_URL . 'assets/css/style.css', false );
 
 	wp_enqueue_style( 'datatable-public-css','//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css', false );
 
@@ -90,7 +90,7 @@ function design_styles(){
 
 }
 
-add_action('wp_enqueue_scripts', 'design_styles');
+add_action('wp_enqueue_scripts', 'design_styles_pets');
 
 
 
