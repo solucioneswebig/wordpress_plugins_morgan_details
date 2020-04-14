@@ -82,17 +82,6 @@ function design_styles(){
 
 	wp_enqueue_script( 'datatable-public-responsive-js','https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js', array('jquery'), null, true );
 
-	wp_enqueue_script( 'datatable-buttons','https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js', array('jquery'), null, true );
-
-	wp_enqueue_script( 'datatable-buttons-flash','https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js', array('jquery'), null, true );
-
-	wp_enqueue_script( 'datatable-jszip','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js', array('jquery'), null, true );
-
-	wp_enqueue_script( 'datatable-pdfmake','https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js', array('jquery'), null, true );
-
-	wp_enqueue_script( 'datatable-html5-buttons','https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js', array('jquery'), null, true );
-
-	wp_enqueue_script( 'datatable-print-buttons','https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js', array('jquery'), null, true );
 
 	wp_enqueue_script( 'sweet-alert','https://cdn.jsdelivr.net/npm/sweetalert2@8', array('jquery'), null, true );
 
