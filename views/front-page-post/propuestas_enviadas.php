@@ -6,5 +6,3 @@ $id = $user->ID;
 
 
 ?>
-
-<h3>Bienvenido <?php echo $user->display_name; ?></h3>

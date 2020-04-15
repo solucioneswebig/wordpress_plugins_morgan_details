@@ -33,11 +33,37 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
 
         include "front-page-post/form-list.php";
 
+    }elseif(isset($_GET["slug"]) && $_GET["slug"] == "mis_finanzas"){
+
+        echo '<h1>Mis finanzas</h1>';
+
+
+        include "front-page-post/finanzas.php";
+
+        
+    }elseif(isset($_GET["slug"]) && $_GET["slug"] == "editar_perfil"){
+
+        echo '<h1>Perfil de la cuenta</h1>';
+
+
+        include "front-page-post/perfil.php";
+
+        
+    }elseif(isset($_GET["slug"]) && $_GET["slug"] == "propuestas_recibidas"){
+
+        echo '<h1>Propuestas recibidas</h1>';
+        include "front-page-post/propuestas_recibidas.php";
+
+        
+    }elseif(isset($_GET["slug"]) && $_GET["slug"] == "propuestas_enviadas"){
+
+        echo '<h1>Propuestas recibidas</h1>';
+        include "front-page-post/propuestas_enviadas.php";
+
+        
     }elseif(isset($_GET["slug"]) && $_GET["slug"] == "add_new"){
 
         echo '<h1>Publicar nueva solicitud</h1>';
-
-        echo '<a href="'.$url.'" class="btn btn-warning mb-3"><i class="fa fa-list"></i> Volver a la lista</a>';
 
         echo do_shortcode('[form_service]');
         
