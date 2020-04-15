@@ -26,7 +26,7 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
 
     if(is_user_logged_in()){
 
-    if(isset($_GET["slug"]) && $_GET["slug"] == "list"){
+    if(isset($_GET["slug"]) && $_GET["slug"] == "lista_servicios"){
         echo '<h1>Lista de servicios</h1>';
 
         echo '<a href="'.$url.'?slug=add_new" class="btn btn-success mb-5"><i class="fa fa-plus"></i> Añadir nuevo</a>';        
@@ -49,11 +49,9 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
 
         echo do_shortcode('[form_service]');
     }else{
-        echo '<h1>Lista de solicitudes</h1>';
+        echo '<h1>Panel de control</h1>';
 
-        echo '<a href="'.$url.'?slug=add_new" class="btn btn-success mb-5"><i class="fa fa-plus"></i> Añadir nuevo</a>';
-
-        include "front-page-post/form-list.php";
+        include "front-page-post/dashboard.php";
     }
     }else{
         echo '<h3>Por favor accede con tu usuario para poder visualizar esta pagina</h3>';
