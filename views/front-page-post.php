@@ -57,7 +57,7 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
         
     }elseif(isset($_GET["slug"]) && $_GET["slug"] == "propuestas_enviadas"){
 
-        echo '<h1>Propuestas recibidas</h1>';
+        echo '<h1>Propuestas enviadas</h1>';
         include "front-page-post/propuestas_enviadas.php";
 
         
