@@ -57,7 +57,9 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
     }
     }else{
         echo '<h3>Por favor accede con tu usuario para poder visualizar esta pagina</h3>';
-        echo '<a href="<?php echo get_site_url(); ?>/acceder/" class="btn btn-info"><i class="fa fa-sign-in-alt"></i> Acceder / Registrate</a>';
+
+
+        echo '<a href="'.get_site_url().'/acceder/" class="btn btn-info"><i class="fa fa-sign-in-alt"></i> Acceder / Registrate</a>';
     }
 	return ob_get_clean();
 }
