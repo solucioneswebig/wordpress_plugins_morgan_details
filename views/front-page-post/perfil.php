@@ -19,9 +19,17 @@ if($obtener_datos_extras){
 
     $nombres = $obtener_datos_extras->nombres_usuario;
     $apellidos = $obtener_datos_extras->apellidos_usuario;
+    $direccion = $obtener_datos_extras->direccion_usuario;
+    $telefono_usuario = $obtener_datos_extras->nro_telefono_usuario;
+    $ciudad_usuario = $obtener_datos_extras->ciudad_usuario;
+    $fecha_usuario = $obtener_datos_extras->fecha_nacimiento_usuario;
 }else{
     $nombres = $user->first_name;
     $apellidos = $user->last_name;
+    $direccion = "";
+    $telefono_usuario = "";
+    $ciudad_usuario = "";
+    $fecha_usuario = "";
 }
 
 
@@ -147,25 +155,25 @@ if(isset($_POST["guardar_datos"])){
                 <div class="col-md-12">
                 <div class="form-group">
                     <label for="">Direccion</label>
-                    <input type="text" class="form-control" name="direccion_usuario" value="<?php echo $obtener_datos_extras->direccion_usuario; ?>">
+                    <input type="text" class="form-control" name="direccion_usuario" value="<?php echo $direccion; ?>">
                 </div> 
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="">Nro Telefono</label>
-                    <input type="text" class="form-control" name="telefono_usuario" value="<?php echo $obtener_datos_extras->nro_telefono_usuario; ?>">
+                    <input type="text" class="form-control" name="telefono_usuario" value="<?php echo $telefono_usuario; ?>">
                 </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="">Ciudad</label>
-                    <input type="text" class="form-control" name="ciudad_usuario" value="<?php echo $obtener_datos_extras->ciudad_usuario; ?>">
+                    <input type="text" class="form-control" name="ciudad_usuario" value="<?php echo $ciudad_usuario; ?>">
                 </div>                 
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="">Fecha de nacimiento</label>
-                    <input type="date" class="form-control" name="fecha_nacimiento_usuario" value="<?php echo $obtener_datos_extras->fecha_nacimiento_usuario; ?>">
+                    <input type="date" class="form-control" name="fecha_nacimiento_usuario" value="<?php echo $fecha_usuario; ?>">
                 </div>  
                 </div>
                 <div class="col-md-12">
