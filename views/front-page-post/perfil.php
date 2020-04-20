@@ -1,4 +1,8 @@
 <?php
+ob_start();
+?>
+
+<?php
 global $wpdb;
 $user = wp_get_current_user();
 $id = $user->ID;
@@ -34,6 +38,11 @@ if($obtener_datos_extras){
     $fecha_usuario = "";
 }
 
+
+
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+$url_site =  "https://" . $host . $url;
 
 if(isset($_POST["guardar_datos"])){
 
@@ -82,10 +91,7 @@ if(isset($_POST["guardar_datos"])){
     }
 
     if($guardar){
-        echo "<script>location.reload();</script>";
-
-
-
+       header("Location: ".$url_site."");
     }else{
         echo "Error";
     }
@@ -187,3 +193,6 @@ if(isset($_POST["guardar_datos"])){
         </div>
     </div>    
 </div>
+<?php
+ob_end_flush();
+?>
