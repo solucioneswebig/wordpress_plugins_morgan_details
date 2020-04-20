@@ -43,11 +43,11 @@ if ( file_exists( dirname( __FILE__ ) . '/cmb2/init.php' ) ) {
 
 global $wpdb;
 
-$prefix_plugin_gn = "gestion_nomina_";
+$prefix_plugin_gn = "gestion_morgan_";
 
 
 
-define('PREFIX', 'gn_');
+define('PREFIX', 'gm_');
 
 define( 'GP_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
@@ -58,9 +58,9 @@ define('PLUGIN_BASE_DIR', dirname(__FILE__));
 
 //EMPIEZO A DEFINIR LAS TABLAS DE LA BD
 
-/*
-define('TABLA_EMPLEADOS' , $wpdb->prefix . $prefix_plugin_gn . 'perfil_empleado');
-*/
+
+define('TABLA_DATOS_EXTRA_USUARIO' , $wpdb->prefix . $prefix_plugin_gn . 'datos_usuario_extra');
+
 
 //FINALIZO LA DEFINICION DE LAS TABLAS DE LA BD
 

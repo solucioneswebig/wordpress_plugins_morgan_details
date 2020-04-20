@@ -61,3 +61,4 @@ include GP_PLUGIN_DIR_PATH . "models/post.php";
 include GP_PLUGIN_DIR_PATH . "models/form-cmb2.php";
 include GP_PLUGIN_DIR_PATH . "models/cpt.php";
 include GP_PLUGIN_DIR_PATH . "models/metaboxes.php";
+include GP_PLUGIN_DIR_PATH . "models/database.php";

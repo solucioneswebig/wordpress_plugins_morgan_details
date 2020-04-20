@@ -43,11 +43,13 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
         
     }elseif(isset($_GET["slug"]) && $_GET["slug"] == "editar_perfil"){
 
-        echo '<h1>Perfil de la cuenta</h1>';
-
 
         include "front-page-post/perfil.php";
 
+        
+    }elseif(isset($_GET["slug"]) && $_GET["slug"] == "cambiar_contrasena"){
+
+        include "front-page-post/cambiar_password.php";
         
     }elseif(isset($_GET["slug"]) && $_GET["slug"] == "propuestas_recibidas"){
 
@@ -64,18 +66,17 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
     }elseif(isset($_GET["slug"]) && $_GET["slug"] == "add_new"){
 
         echo '<h1>Publicar nueva solicitud</h1>';
-
+        echo '<a href="'.$url.'?slug=lista_servicios" class="btn btn-warning mb-3"><i class="fa fa-list"></i> Volver a la lista</a>';
         echo do_shortcode('[form_service]');
         
     }elseif(isset($_GET["slug"]) && $_GET["slug"] == "edit_post"){
 
         echo '<h1>Editar solicitud</h1>';
 
-        echo '<a href="'.$url.'" class="btn btn-warning mb-3"><i class="fa fa-list"></i> Volver a la lista</a> <a href="'.$url.'?slug=add_new" class="btn btn-success mb-3"><i class="fa fa-plus"></i> Añadir nuevo</a>';
+        echo '<a href="'.$url.'?slug=lista_servicios" class="btn btn-warning mb-3"><i class="fa fa-list"></i> Volver a la lista</a> <a href="'.$url.'?slug=add_new" class="btn btn-success mb-3"><i class="fa fa-plus"></i> Añadir nuevo</a>';
 
         echo do_shortcode('[form_service]');
     }else{
-        echo '<h1>Panel de control</h1>';
 
         include "front-page-post/dashboard.php";
     }
