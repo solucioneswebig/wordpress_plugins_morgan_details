@@ -19,6 +19,7 @@ if($obtener_datos_extras){
 
     $nombres = $obtener_datos_extras->nombres_usuario;
     $apellidos = $obtener_datos_extras->apellidos_usuario;
+    $documento_usuario = $obtener_datos_extras->nro_documento_usuario;
     $direccion = $obtener_datos_extras->direccion_usuario;
     $telefono_usuario = $obtener_datos_extras->nro_telefono_usuario;
     $ciudad_usuario = $obtener_datos_extras->ciudad_usuario;
@@ -26,6 +27,7 @@ if($obtener_datos_extras){
 }else{
     $nombres = $user->first_name;
     $apellidos = $user->last_name;
+    $documento_usuario = "";
     $direccion = "";
     $telefono_usuario = "";
     $ciudad_usuario = "";
@@ -134,7 +136,7 @@ if(isset($_POST["guardar_datos"])){
                 <div class="col-md-6">
                 <div class="form-group">
                     <label for="">Nro Documento de identidad</label>
-                    <input type="text" class="form-control" name="documento_usuario" value="<?php echo $obtener_datos_extras->nro_documento_usuario; ?>">
+                    <input type="text" class="form-control" name="documento_usuario" value="<?php echo $documento_usuario; ?>">
                 </div>
                 </div>
 
