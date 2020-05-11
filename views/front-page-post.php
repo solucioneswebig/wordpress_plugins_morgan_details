@@ -2,6 +2,9 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; 
 
+
+
+
 require("front-page-post/form-standar.php");
 
 /**
@@ -11,8 +14,43 @@ require("front-page-post/form-standar.php");
  * @return string       Form html
  */
 function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
+    global $wpdb;
+    $user = wp_get_current_user();
+    $id = $user->ID;
+    $obtener_datos_extras = $wpdb->get_row("SELECT * FROM ".TABLA_DATOS_EXTRA_USUARIO." WHERE id_user ='".$id."'");
+    $host= $_SERVER["HTTP_HOST"];
+    $url= $_SERVER["REQUEST_URI"];
+    $url_site =  "https://" . $host . $url;
+    $datos_faltantes = 0;
+    if($obtener_datos_extras){
+        foreach($obtener_datos_extras as $key){
 
-	$atts = shortcode_atts( array(
+            if($key == ""){
+                $datos_faltantes++;
+            }
+            
+
+        }
+
+        $nombres = $obtener_datos_extras->nombres_usuario;
+        $apellidos = $obtener_datos_extras->apellidos_usuario;
+        $documento_usuario = $obtener_datos_extras->nro_documento_usuario;
+        $direccion = $obtener_datos_extras->direccion_usuario;
+        $telefono_usuario = $obtener_datos_extras->nro_telefono_usuario;
+        $ciudad_usuario = $obtener_datos_extras->ciudad_usuario;
+        $fecha_usuario = $obtener_datos_extras->fecha_nacimiento_usuario;
+    }else{
+        $nombres = $user->first_name;
+        $apellidos = $user->last_name;
+        $documento_usuario = "";
+        $direccion = "";
+        $telefono_usuario = "";
+        $ciudad_usuario = "";
+        $fecha_usuario = "";
+    }
+
+
+    $atts = shortcode_atts( array(
 		'doce_meses' => 0.561272,
         'nueve_meses' => 0.452492,
         'seis_meses' => 0.32402
@@ -26,10 +64,21 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
 
     if(is_user_logged_in()){
 
+   
+    if(!$obtener_datos_extras || $datos_faltantes > 0 || $obtener_datos_extras->sexo_usuario == 0):
+    ?>
+
+    <div class="alert alert-warning">
+        Perfil aun no completado, por favor complete todos los datos de su cuenta. <?php if(isset($_GET["slug"]) && $_GET["slug"] != "editar_perfil" ){ ?><a href="<?php echo get_site_url(); ?>/mi-cuenta/?slug=editar_perfil">Completar ahora</a><?php } ?>
+    </div>
+
+    <?php 
+    endif;   
+
     if(isset($_GET["slug"]) && $_GET["slug"] == "lista_servicios"){
         echo '<h1>Lista de servicios</h1>';
 
-        echo '<a href="'.$url.'?slug=add_new" class="btn btn-success mb-5"><i class="fa fa-plus"></i> Añadir nuevo</a>';        
+              
 
         include "front-page-post/form-list.php";
 

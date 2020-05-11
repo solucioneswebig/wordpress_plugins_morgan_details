@@ -10,6 +10,18 @@ $args = array(
 
 $query = new WP_Query( $args );
 
+
+if(!$obtener_datos_extras || $datos_faltantes > 0 || $obtener_datos_extras->sexo_usuario == 0):
+
+?>    
+
+<div class="alert alert-warning">
+    Es necesario completar el perfil antes de realizar una publicación de un servicio.
+</div>
+
+<?php
+else:
+echo '<a href="'.$url.'?slug=add_new" class="btn btn-success mb-5"><i class="fa fa-plus"></i> Añadir nuevo</a>';  
 ?>
 
 <table class="table">
@@ -69,3 +81,6 @@ wp_reset_postdata();
 </table>
 
 
+<?php 
+endif;
+?>

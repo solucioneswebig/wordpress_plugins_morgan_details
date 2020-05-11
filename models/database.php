@@ -39,6 +39,30 @@ function gn_database(){
 
     )$charset_collate;";
 
+
+    $datos_extras_usuario = "CREATE TABLE IF NOT EXISTS " . TABLA_DATOS_PROPUESTAS . " (
+
+        id_propuesta bigint(20) NOT NULL AUTO_INCREMENT,
+
+        id_user int(20) NOT NULL,
+
+        id_post int(20) NOT NULL,
+
+        descripcion_propuesta longtext NOT NULL,
+
+        valor_propuesta longtext NOT NULL,
+
+        fecha_comienzo date NOT NULL,
+         
+        fecha_fin date NOT NULL,
+
+        estatus int(20) NOT NULL,
+
+        fecha_propuesta date NOT NULL,
+
+        PRIMARY KEY (id_propuesta)
+
+    )$charset_collate;";
   
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

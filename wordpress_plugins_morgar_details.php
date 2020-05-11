@@ -60,6 +60,9 @@ define('PLUGIN_BASE_DIR', dirname(__FILE__));
 
 
 define('TABLA_DATOS_EXTRA_USUARIO' , $wpdb->prefix . $prefix_plugin_gn . 'datos_usuario_extra');
+define('TABLA_DATOS_PROPUESTAS' , $wpdb->prefix . $prefix_plugin_gn . 'datos_propuestas');
+
+
 
 
 //FINALIZO LA DEFINICION DE LAS TABLAS DE LA BD

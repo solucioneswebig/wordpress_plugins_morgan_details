@@ -3,46 +3,13 @@ ob_start();
 ?>
 
 <?php
-global $wpdb;
-$user = wp_get_current_user();
-$id = $user->ID;
-
-
-$obtener_datos_extras = $wpdb->get_row("SELECT * FROM ".TABLA_DATOS_EXTRA_USUARIO." WHERE id_user ='".$id."'");
-
-$datos_faltantes = 0;
-if($obtener_datos_extras){
-    foreach($obtener_datos_extras as $key){
-
-        if($key == ""){
-            $datos_faltantes++;
-        }
-        
-
-    }
-
-    $nombres = $obtener_datos_extras->nombres_usuario;
-    $apellidos = $obtener_datos_extras->apellidos_usuario;
-    $documento_usuario = $obtener_datos_extras->nro_documento_usuario;
-    $direccion = $obtener_datos_extras->direccion_usuario;
-    $telefono_usuario = $obtener_datos_extras->nro_telefono_usuario;
-    $ciudad_usuario = $obtener_datos_extras->ciudad_usuario;
-    $fecha_usuario = $obtener_datos_extras->fecha_nacimiento_usuario;
-}else{
-    $nombres = $user->first_name;
-    $apellidos = $user->last_name;
-    $documento_usuario = "";
-    $direccion = "";
-    $telefono_usuario = "";
-    $ciudad_usuario = "";
-    $fecha_usuario = "";
-}
 
 
 
-$host= $_SERVER["HTTP_HOST"];
-$url= $_SERVER["REQUEST_URI"];
-$url_site =  "https://" . $host . $url;
+
+
+
+
 
 if(isset($_POST["guardar_datos"])){
 
@@ -110,17 +77,7 @@ if(isset($_POST["guardar_datos"])){
 
     <div class="row">
         <div class="col-md-12">
-            <?php 
-            if(!$obtener_datos_extras || $datos_faltantes > 0 || $obtener_datos_extras->sexo_usuario == 0):
-            ?>
 
-            <div class="alert alert-warning">
-                Perfil aun no completado, por favor complete todos los datos de su cuenta.
-            </div>
-
-            <?php 
-            endif;
-            ?>
         </div>
     </div>
 

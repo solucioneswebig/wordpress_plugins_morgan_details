@@ -84,16 +84,20 @@ function ga_campos_formulario() {
 
     $cmb->add_field( array(
 		'name'       => __( 'Presupuesto', 'cmb2' ),
-		'desc'       => __( 'Valor que maneja para esta solicitud', 'cmb2' ),
+		'desc'       => __( 'El monto que espera cancelar por este servicio, tenga en cuanta que las propuestas pueden ser por montos mas elevados.', 'cmb2' ),
         'id'               => 'precio-servicio',
         'type'             => 'select',
         'show_option_none' => false,
         'default'    => $presupuesto,
         'options'          => array(
-            '1'     => __( '0 - 50', 'cmb2' ),
-            '2'     => __( '50 - 150', 'cmb2' ),
-            '3'     => __( '150 - 300', 'cmb2' ),
-            '4'     => __( '300 +', 'cmb2' ),
+            '1'     => __( '$0 - $50', 'cmb2' ),
+            '2'     => __( '$50 - $150', 'cmb2' ),
+            '3'     => __( '$150 - $300', 'cmb2' ),
+            '4'     => __( '$300  - $500', 'cmb2' ),
+            '5'     => __( '$500  - $1000', 'cmb2' ),
+            '6'     => __( '$1000  - $1500', 'cmb2' ),
+            '7'     => __( '$1500  - $3000', 'cmb2' ),
+            '8'     => __( '$3000 +', 'cmb2' ),
         ),
     ) );
 
