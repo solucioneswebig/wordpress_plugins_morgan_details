@@ -108,8 +108,8 @@ if(isset($_POST["guardar_datos"])){
                     <label for="">Sexo</label>
                     <select class="form-control" name="sexo_usuario">
                         <option value="0">Seleccionar</option>
-                        <option value="1" <?php if($obtener_datos_extras->sexo_usuario == 1){ echo "selected"; } ?>>Hombre</option>
-                        <option value="2" <?php if($obtener_datos_extras->sexo_usuario == 2){ echo "selected"; } ?>>Mujer</option>
+                        <option value="1" <?php if(!empty($obtener_datos_extras) && $obtener_datos_extras->sexo_usuario == 1){ echo "selected"; } ?>>Hombre</option>
+                        <option value="2" <?php if(!empty($obtener_datos_extras) && $obtener_datos_extras->sexo_usuario == 2){ echo "selected"; } ?>>Mujer</option>
                     </select>
                 </div> 
                 </div>

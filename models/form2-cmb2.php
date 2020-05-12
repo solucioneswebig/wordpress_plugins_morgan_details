@@ -202,9 +202,9 @@ function yourprefix_handle_frontend_new_post_form_submission() {
 	}
 
 	// And that the title is not the default title
-	if ( $cmb->get_field( 'submitted_post_title' )->default() == $_POST['submitted_post_title'] ) {
+	/*if ( $cmb->get_field( 'submitted_post_title' )->default() == $_POST['submitted_post_title'] ) {
 		return $cmb->prop( 'submission_error', new WP_Error( 'post_data_missing', __( 'Please enter a new title.' ) ) );
-	}
+	}*/
 
 	/**
 	 * Fetch sanitized values

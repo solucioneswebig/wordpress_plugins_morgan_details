@@ -203,7 +203,7 @@ function ga_insertar_receta() {
     */
     $post_data['meta_input'] =  array(
             'precio-servicio' => $valores_sanitizados['precio-servicio'],
-            'galeria-servicios' => $valores_sanitizados['galeria-servicios']
+            //'galeria-servicios' => $valores_sanitizados['galeria-servicios']
     );
     
     

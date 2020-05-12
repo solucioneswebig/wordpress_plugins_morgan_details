@@ -29,8 +29,8 @@ foreach($post_autor as $key => $post):
     $buscar_recibidos = $wpdb->get_results("SELECT * FROM ".TABLA_DATOS_PROPUESTAS." WHERE id_post = ".$post->ID.""); 
     foreach($buscar_recibidos as $key_2 => $propuesta):
     $user_propuesta = get_userdata($propuesta->id_user);
-    $datos_usuario = $wpdb->get_row("SELECT * FROM ".TABLA_DATOS_EXTRA_USUARIO." WHERE id_user = ".$post->ID.""); 
-    
+    $datos_usuario = $wpdb->get_row("SELECT * FROM ".TABLA_DATOS_EXTRA_USUARIO." WHERE id_user = ".$propuesta->id_user.""); 
+ 
 ?>
     <tr>
        <td><?php echo $i; ?></td>
