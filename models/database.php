@@ -63,6 +63,25 @@ function gn_database(){
         PRIMARY KEY (id_propuesta)
 
     )$charset_collate;";
+
+
+    $datos_extras_usuario = "CREATE TABLE IF NOT EXISTS " . TABLA_DATOS_CHAT . " (
+
+        id_chat bigint(20) NOT NULL AUTO_INCREMENT,
+
+        id_user int(20) NOT NULL,
+
+        id_cliente int(20) NOT NULL,
+
+        id_post int(20) NOT NULL,
+
+        mensaje longtext NOT NULL,
+
+        fecha timestamp NOT NULL,
+
+        PRIMARY KEY (id_chat)
+
+    )$charset_collate;";
   
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

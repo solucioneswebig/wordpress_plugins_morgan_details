@@ -61,6 +61,7 @@ define('PLUGIN_BASE_DIR', dirname(__FILE__));
 
 define('TABLA_DATOS_EXTRA_USUARIO' , $wpdb->prefix . $prefix_plugin_gn . 'datos_usuario_extra');
 define('TABLA_DATOS_PROPUESTAS' , $wpdb->prefix . $prefix_plugin_gn . 'datos_propuestas');
+define('TABLA_DATOS_CHAT' , $wpdb->prefix . $prefix_plugin_gn . 'datos_chat');
 
 
 
@@ -79,23 +80,31 @@ function design_styles_pets(){
 
 	wp_enqueue_style( 'datatable-buttons','https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css', false );
 
+	wp_enqueue_style( 'chatbox-css', GP_PLUGIN_DIR_URL . 'assets/lib/chat/css/chat.css', false );
+
 	wp_enqueue_script( 'jquery' );
 
 	wp_enqueue_script( 'datatable-public-js','//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js', array('jquery'), '1.10.19', true );
 
 	wp_enqueue_script( 'datatable-public-responsive-js','https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js', array('jquery'), null, true );
 
-
 	wp_enqueue_script( 'sweet-alert','https://cdn.jsdelivr.net/npm/sweetalert2@8', array('jquery'), null, true );
 
 	wp_enqueue_script( 'mtb-scripts-general', GP_PLUGIN_DIR_URL . 'assets/js/script.js' , array( 'jquery' ), null , false );
 
-
+	wp_localize_script('mtb-scripts-general','busqueda_vars',['ajaxurl'=>admin_url('admin-ajax.php')]);
 }
 
 add_action('wp_enqueue_scripts', 'design_styles_pets');
 
 
+//Devolver datos a archivo js
+add_action('wp_ajax_nopriv_ajax_busqueda','busqueda_ajax');
+add_action('wp_ajax_ajax_busqueda','busqueda_ajax');
+
+function busqueda_ajax(){
+  include "ajax/busqueda.ajax.php";
+}
 
 
 
