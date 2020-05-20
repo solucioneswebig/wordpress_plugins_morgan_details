@@ -1,7 +1,8 @@
-.posision-chat {
+.posicion-caja {
   position: fixed;
-  bottom: -10%;
+  bottom: 3px;
   right: 1px;
+  width: 30%;
 }
 
 .chat {

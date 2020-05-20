@@ -20,6 +20,7 @@ $recibidos = 0;
         <th>Trabajo</th>
         <th>Participante</th>
         <th>Descripcion Propuesta</th>
+        <th>Messaje</th>
     </tr>
 </thead>
 <tbody>
@@ -27,6 +28,7 @@ $recibidos = 0;
 $i = 1;
 foreach($post_autor as $key => $post):
     $buscar_recibidos = $wpdb->get_results("SELECT * FROM ".TABLA_DATOS_PROPUESTAS." WHERE id_post = ".$post->ID.""); 
+
     foreach($buscar_recibidos as $key_2 => $propuesta):
     $user_propuesta = get_userdata($propuesta->id_user);
     $datos_usuario = $wpdb->get_row("SELECT * FROM ".TABLA_DATOS_EXTRA_USUARIO." WHERE id_user = ".$propuesta->id_user.""); 
@@ -35,8 +37,14 @@ foreach($post_autor as $key => $post):
     <tr>
        <td><?php echo $i; ?></td>
        <td><?php echo $post->post_title; ?></td>
-       <td><?php echo $datos_usuario->nombres_usuario." ".$datos_usuario->apellidos_usuario; ?></td>
+       <td><?php 
+       if(!empty($datos_usuario)){
+
+           echo $datos_usuario->nombres_usuario." ".$datos_usuario->apellidos_usuario; 
+       }
+        ?></td>
        <td><?php echo $post->post_title; ?></td>
+       <td><button type="button" class="btn btn-propuesta messenger" id-user="<?php echo get_current_user_id(); ?>" id-post="<?php echo $post->ID ?>" id-cliente="<?php echo $propuesta->id_user; ?>">Enviar Mensaje</button> </td>
     </tr>
 <?php
     endforeach;
