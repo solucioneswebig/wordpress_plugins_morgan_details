@@ -1,6 +1,6 @@
 (function ($) {
   $(document).ready(function () {
-    // $(".table").DataTable();
+    let buscarMensaje;
 
     $("#action_menu_btn").click(function () {
       $(".action_menu").toggle();
@@ -8,7 +8,6 @@
 
     $(document).on("click", ".messenger", function () {
       $("#chat").removeClass("d-none");
-      // $(".msg_card_body").html("");
 
       let id_user = $(this).attr("id-user");
       let id_post = $(this).attr("id-post");
@@ -18,14 +17,7 @@
       $(".send_btn").attr("id-post", id_post);
       $(".send_btn").attr("id-cliente", id_cliente);
 
-      // let data = {
-      //   id_user,
-      //   id_post,
-      //   id_cliente,
-      // };
-      // chat_mensaje(data);
-
-      setInterval(function () {
+      buscarMensaje = setInterval(function () {
         let id_user = $(".send_btn").attr("id-user");
         let id_post = $(".send_btn").attr("id-post");
         let id_cliente = $(".send_btn").attr("id-cliente");
@@ -41,6 +33,7 @@
 
     $(".cerrar-chat").click(function () {
       $("#chat").addClass("d-none");
+      clearInterval(buscarMensaje);
     });
 
     let contar_mensajes = 0;
@@ -52,9 +45,9 @@
 
       let data = {
         action: "ajax_busqueda",
-        id_user: id_user,
-        id_cliente: id_cliente,
-        id_post: id_post,
+        id_user,
+        id_cliente,
+        id_post,
         abrir_chat: 1,
       };
 
@@ -64,11 +57,12 @@
         data: data,
         beforeSend: function () {},
         success: function (result) {
-          // console.log(result);
+          console.log(result);
           let resp = JSON.parse(result.slice(0, -1));
           let contador = resp.length;
           $(".contar-mensage").html(contador + " mensajes");
-
+          console.log(contador);
+          console.log(contar_mensajes);
           if (contar_mensajes != contador) {
             contar_mensajes = contador;
             $(".msg_card_body").html("");
@@ -144,7 +138,7 @@
         chat_mensaje: 1,
       };
 
-      console.log(data);
+      // console.log(data);
 
       $.ajax({
         url: busqueda_vars.ajaxurl,
