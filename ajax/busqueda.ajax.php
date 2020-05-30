@@ -33,6 +33,7 @@ if(isset($_POST["chat_mensaje"])){
 }else if(isset($_POST["notificacion"])){
 
 	$id_cliente = $_POST["id_cliente"];
+	
 
 	$contar_mensajes = $wpdb->get_results("SELECT * FROM ".TABLA_DATOS_CHAT." WHERE id_cliente = ".$id_cliente." GROUP BY id_user");
 

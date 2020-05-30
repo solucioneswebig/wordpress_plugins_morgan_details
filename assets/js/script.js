@@ -203,8 +203,8 @@
                 let id_cliente = $(this).attr("id-cliente");
 
                 let body = $(".msg_card_body");
-                console.log(mensaje.length);
-                console.log(mensaje);
+                // console.log(mensaje.length);
+                // console.log(mensaje);
                 if (mensaje != "" && mensaje != null && mensaje.trim().length >= 1) {
                     let texto = `<div class="d-flex justify-content-start mb-4">
 								<div class="img_cont_msg">
