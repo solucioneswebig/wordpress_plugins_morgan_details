@@ -44,7 +44,7 @@ foreach($post_autor as $key => $post):
        }
         ?></td>
        <td><?php echo $post->post_title; ?></td>
-       <td><button type="button" class="btn btn-propuesta messenger" id-user="<?php echo get_current_user_id(); ?>" id-post="<?php echo $post->ID ?>" id-cliente="<?php echo $propuesta->id_user; ?>">Enviar Mensaje</button> </td>
+       <td><button type="button" class="btn btn-propuesta messenger" id-user="<?php echo get_current_user_id(); ?>" id-post="<?php echo $post->ID ?>" id-cliente="<?php echo $propuesta->id_user; ?>" id_enviado="<?php echo get_current_user_id() ?>">Enviar Mensaje</button> </td>
     </tr>
 <?php
     endforeach;

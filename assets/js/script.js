@@ -3,267 +3,183 @@
         let buscarMensaje;
         let buscarNotificacion;
 
+        let id_user;
+        let id_post;
+        let id_cliente;
+        let id_envio;
+
+        const chat = document.querySelector("#chat");
+        const enviar = document.querySelector(".send_btn");
+        const cerrar = document.querySelector(".cerrar-chat");
+        const body_msj = document.querySelector(".msg_card_body");
+        const mensaje = document.querySelector(".messenger");
+        const notificar = document.querySelector(".notificar");
+        const body = document.querySelector(".msg_card_body");
+
         $("#action_menu_btn").click(function() {
             $(".action_menu").toggle();
         });
 
-        if ($(".notificar").length) {
-            buscarNotificacion = setInterval(function() {
-                let id_cliente = $(".notificar").attr("id-cliente");
+        if (document.body.contains(mensaje)) {
+            mensaje.addEventListener("click", function() {
+                chat.classList.remove("d-none");
+
+                id_user = this.getAttribute("id-user");
+                id_post = this.getAttribute("id-post");
+                id_cliente = this.getAttribute("id-cliente");
+                id_envio = this.getAttribute("id_enviado");
 
                 let data = {
-                    action: "ajax_busqueda",
-                    id_cliente: id_cliente,
-                    notificacion: 1,
-                };
-
-                $.ajax({
-                    url: busqueda_vars.ajaxurl,
-                    type: "post",
-                    data: data,
-                    beforeSend: function() {},
-                    success: function(result) {
-                        let resp = JSON.parse(result.slice(0, -1));
-                        let contador = resp.length;
-                        $(".notificar").html(" " + contador);
-                    },
-                });
-            }, 5000);
-        }
-        $(document).on("click", ".messenger", function() {
-            $("#chat").removeClass("d-none");
-
-            let id_user = $(this).attr("id-user");
-            let id_post = $(this).attr("id-post");
-            let id_cliente = $(this).attr("id-cliente");
-
-            $(".send_btn").attr("id-user", id_user);
-            $(".send_btn").attr("id-post", id_post);
-            $(".send_btn").attr("id-cliente", id_cliente);
-
-            buscarMensaje = setInterval(function() {
-                let id_user = $(".send_btn").attr("id-user");
-                let id_post = $(".send_btn").attr("id-post");
-                let id_cliente = $(".send_btn").attr("id-cliente");
-
-                let data = {
+                    id_cliente,
                     id_user,
                     id_post,
-                    id_cliente,
+                    id_envio,
                 };
                 chat_mensaje(data);
-            }, 2000);
+            });
+        }
+
+        enviar.addEventListener("click", function() {
+            let msg = document.querySelector(".type_msg").value;
+            let f = new Date();
+            let fecha =
+                f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+
+            let datos = { mensaje: msg, fecha: fecha };
+            const texto = cuerpo_mensaje(datos);
+
+            body.innerHTML += texto;
+
+            $(".msg_card_body").scrollTop($(".msg_card_body").prop("scrollHeight"));
+
+            let data = new FormData();
+
+            data.append("action", "ajax_busqueda");
+            data.append("id_cliente", id_cliente);
+            data.append("id_user", id_user);
+            data.append("id_post", id_post);
+            data.append("id_envio", id_envio);
+            data.append("mensaje", msg);
+            data.append("chat_mensaje", 1);
+
+            fetch(busqueda_vars.ajaxurl, {
+                    method: "POST",
+                    body: data,
+                })
+                .then((response) => response.json())
+                .then((response) => console.log(response))
+                .catch((err) => console.log(err));
         });
 
-        $(".cerrar-chat").click(function() {
-            $("#chat").addClass("d-none");
+        if (document.body.contains(notificar)) {
+            buscarNotificacion = setInterval(function() {
+                let id_cliente = notificar.getAttribute("id-cliente");
+
+                let data = new FormData();
+
+                data.append("action", "ajax_busqueda");
+                data.append("id_cliente", id_cliente);
+                data.append("notificacion", 1);
+
+                fetch(busqueda_vars.ajaxurl, {
+                        method: "POST",
+                        body: data,
+                    })
+                    .then((response) => response.json())
+                    .then((response) => {
+                        // console.log(response);
+                        let contador = response.length;
+                        // console.log(contador);
+                        notificar.innerHTML = " " + contador;
+                    })
+                    .catch((err) => console.log(err));
+            }, 10000);
+
+            buscarMensaje = setInterval(function() {
+                if (
+                    id_cliente != null &&
+                    id_user != null &&
+                    id_post != null &&
+                    document.body.contains(mensaje)
+                ) {
+                    let data = {
+                        id_cliente,
+                        id_user,
+                        id_post,
+                        id_envio,
+                    };
+                    chat_mensaje(data);
+                }
+            }, 5000);
+        }
+
+        cerrar.addEventListener("click", function() {
+            chat.classList.add("d-none");
             clearInterval(buscarMensaje);
         });
 
-        let contar_mensajes = 0;
-
         function chat_mensaje(dato) {
-            let id_user = dato.id_user;
-            let id_post = dato.id_post;
-            let id_cliente = dato.id_cliente;
+            let data = new FormData();
+            let activo;
 
-            let data = {
-                action: "ajax_busqueda",
-                id_user,
-                id_cliente,
-                id_post,
-                abrir_chat: 1,
-            };
+            data.append("action", "ajax_busqueda");
+            data.append("id_cliente", dato.id_cliente);
+            data.append("id_user", dato.id_user);
+            data.append("id_post", dato.id_post);
+            data.append("id_envio", dato.id_envio);
+            data.append("abrir_chat", 1);
 
-            $.ajax({
-                url: busqueda_vars.ajaxurl,
-                type: "post",
-                data: data,
-                beforeSend: function() {},
-                success: function(result) {
-                    // console.log(result);
-                    let resp = JSON.parse(result.slice(0, -1));
-                    let contador = resp.length;
-                    $(".contar-mensage").html(contador + " mensajes");
-                    // console.log(contador);
-                    // console.log(contar_mensajes);
-                    if (contar_mensajes != contador) {
-                        contar_mensajes = contador;
-                        $(".msg_card_body").html("");
-                        resp.map((data) => {
-                            let mensaje = `<div class="d-flex justify-content-start mb-4">
-								<div class="img_cont_msg">
-									<i class="fas fa-user-circle" style="font-size: 3rem"></i>
+            fetch(busqueda_vars.ajaxurl, {
+                    method: "POST",
+                    body: data,
+                })
+                .then((response) => response.json())
+                .then((response) => {
+                    // console.log(response);
+                    body_msj.innerHTML = "";
+
+                    response.map((data) => {
+                        if (data.id_user == data.id_envio) {
+                            activo = 1;
+                        } else {
+                            activo = 0;
+                        }
+                        let datos = {
+                            mensaje: data.mensaje,
+                            fecha: data.fecha,
+                            activo: activo,
+                        };
+                        let cuerpo = cuerpo_mensaje(datos);
+                        $(".msg_card_body").append(cuerpo);
+                    });
+
+                    $(".msg_card_body").scrollTop(
+                        $(".msg_card_body").prop("scrollHeight")
+                    );
+                })
+                .catch((err) => console.log(err));
+        }
+
+        function cuerpo_mensaje(data) {
+            let clase;
+
+            if (data.activo) {
+                clase = "justify-content-end";
+            } else {
+                clase = "justify-content-start";
+            }
+
+            let mensaje = `<div class="d-flex ${clase} mb-4">
+			    <div class="img_cont_msg">
+				    <i class="fas fa-user-circle" style="font-size: 3rem"></i>
 								</div>
 								<div class="msg_cotainer">
 									${data.mensaje}
 									<span class="msg_time">${data.fecha}</span>
 								</div>
-              </div>`;
+							</div>`;
 
-                            $(".msg_card_body").append(mensaje);
-                            $(".msg_card_body").scrollTop(
-                                $(".msg_card_body").prop("scrollHeight")
-                            );
-                        });
-                    }
-                },
-                error: function(jqXHR, exception) {
-                    var msg = "";
-                    if (jqXHR.status === 0) {
-                        msg = "Not connect.\n Verify Network.";
-                    } else if (jqXHR.status == 404) {
-                        msg = "Requested page not found. [404]";
-                    } else if (jqXHR.status == 500) {
-                        msg = "Internal Server Error [500].";
-                    } else if (exception === "parsererror") {
-                        msg = "Requested JSON parse failed.";
-                    } else if (exception === "timeout") {
-                        msg = "Time out error.";
-                    } else if (exception === "abort") {
-                        msg = "Ajax request aborted.";
-                    } else {
-                        msg = "Uncaught Error.\n" + jqXHR.responseText;
-                    }
-                    console.log(msg);
-                },
-            });
+            return mensaje;
         }
-
-        $(".send_btn").click(function() {
-            let mensaje = $(".type_msg").val();
-            let id_user = $(this).attr("id-user");
-            let id_post = $(this).attr("id-post");
-            let id_cliente = $(this).attr("id-cliente");
-
-            let body = $(".msg_card_body");
-
-            let texto = `<div class="d-flex justify-content-start mb-4">
-								<div class="img_cont_msg">
-									<i class="fas fa-user-circle" style="font-size: 3rem"></i>
-								</div>
-								<div class="msg_cotainer">
-									${mensaje}
-									<span class="msg_time">9:12 AM, Today</span>
-								</div>
-              </div>`;
-
-            body.append(texto);
-            $(".type_msg").val("");
-
-            $(".msg_card_body").scrollTop($(".msg_card_body").prop("scrollHeight"));
-
-            let data = {
-                action: "ajax_busqueda",
-                id_user: id_user,
-                id_cliente: id_cliente,
-                id_post: id_post,
-                mensaje: mensaje,
-                chat_mensaje: 1,
-            };
-
-            // console.log(data);
-
-            $.ajax({
-                url: busqueda_vars.ajaxurl,
-                type: "post",
-                data: data,
-                beforeSend: function() {},
-                success: function(result) {
-                    // console.log(result);
-                },
-                error: function(jqXHR, exception) {
-                    var msg = "";
-                    if (jqXHR.status === 0) {
-                        msg = "Not connect.\n Verify Network.";
-                    } else if (jqXHR.status == 404) {
-                        msg = "Requested page not found. [404]";
-                    } else if (jqXHR.status == 500) {
-                        msg = "Internal Server Error [500].";
-                    } else if (exception === "parsererror") {
-                        msg = "Requested JSON parse failed.";
-                    } else if (exception === "timeout") {
-                        msg = "Time out error.";
-                    } else if (exception === "abort") {
-                        msg = "Ajax request aborted.";
-                    } else {
-                        msg = "Uncaught Error.\n" + jqXHR.responseText;
-                    }
-                    console.log(msg);
-                },
-            });
-        });
-
-        $(".type_msg").keydown(function(e) {
-            if (e.keyCode == 13) {
-                // console.log("presiono enter");
-                let mensaje = $(".type_msg").val();
-                let id_user = $(this).attr("id-user");
-                let id_post = $(this).attr("id-post");
-                let id_cliente = $(this).attr("id-cliente");
-
-                let body = $(".msg_card_body");
-                // console.log(mensaje.length);
-                // console.log(mensaje);
-                if (mensaje != "" && mensaje != null && mensaje.trim().length >= 1) {
-                    let texto = `<div class="d-flex justify-content-start mb-4">
-								<div class="img_cont_msg">
-									<i class="fas fa-user-circle" style="font-size: 3rem"></i>
-								</div>
-								<div class="msg_cotainer">
-									${mensaje}
-									<span class="msg_time">9:12 AM, Today</span>
-								</div>
-              </div>`;
-
-                    body.append(texto);
-                    $(".type_msg").val("");
-
-                    $(".msg_card_body").scrollTop(
-                        $(".msg_card_body").prop("scrollHeight")
-                    );
-
-                    let data = {
-                        action: "ajax_busqueda",
-                        id_user: id_user,
-                        id_cliente: id_cliente,
-                        id_post: id_post,
-                        mensaje: mensaje,
-                        chat_mensaje: 1,
-                    };
-
-                    // console.log(data);
-
-                    $.ajax({
-                        url: busqueda_vars.ajaxurl,
-                        type: "post",
-                        data: data,
-                        beforeSend: function() {},
-                        success: function(result) {
-                            // console.log(result);
-                        },
-                        error: function(jqXHR, exception) {
-                            var msg = "";
-                            if (jqXHR.status === 0) {
-                                msg = "Not connect.\n Verify Network.";
-                            } else if (jqXHR.status == 404) {
-                                msg = "Requested page not found. [404]";
-                            } else if (jqXHR.status == 500) {
-                                msg = "Internal Server Error [500].";
-                            } else if (exception === "parsererror") {
-                                msg = "Requested JSON parse failed.";
-                            } else if (exception === "timeout") {
-                                msg = "Time out error.";
-                            } else if (exception === "abort") {
-                                msg = "Ajax request aborted.";
-                            } else {
-                                msg = "Uncaught Error.\n" + jqXHR.responseText;
-                            }
-                            console.log(msg);
-                        },
-                    });
-                }
-            }
-        });
     });
 })(jQuery);

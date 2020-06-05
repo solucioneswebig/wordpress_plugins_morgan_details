@@ -9,17 +9,15 @@ if(isset($_POST["chat_mensaje"])){
       "id_user"   			=> $_POST["id_user"],
       "id_cliente"      => $_POST["id_cliente"],
       "id_post"  				=> $_POST["id_post"],
-			"mensaje" 		  	=> $_POST["mensaje"]
+			"mensaje" 		  	=> $_POST["mensaje"],
+			"id_envio"				=> $_POST["id_envio"]
 	];
 
 	$guardar = $wpdb->insert(
       TABLA_DATOS_CHAT, 
       $data
 	);
-	
-	if($guardar){
-		echo 1;
-	}
+	echo json_encode($guardar);
 
 }else if(isset($_POST["abrir_chat"])){
 
@@ -35,7 +33,7 @@ if(isset($_POST["chat_mensaje"])){
 	$id_cliente = $_POST["id_cliente"];
 	
 
-	$contar_mensajes = $wpdb->get_results("SELECT * FROM ".TABLA_DATOS_CHAT." WHERE id_cliente = ".$id_cliente." GROUP BY id_user");
+	$contar_mensajes = $wpdb->get_results("SELECT * FROM ".TABLA_DATOS_CHAT." WHERE id_cliente = ".$id_cliente." ");
 
 	echo json_encode($contar_mensajes);
 

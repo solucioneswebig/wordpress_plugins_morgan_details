@@ -103,7 +103,8 @@ add_action('wp_ajax_nopriv_ajax_busqueda','busqueda_ajax');
 add_action('wp_ajax_ajax_busqueda','busqueda_ajax');
 
 function busqueda_ajax(){
-  include "ajax/busqueda.ajax.php";
+	include "ajax/busqueda.ajax.php";
+	wp_die();
 }
 
 
