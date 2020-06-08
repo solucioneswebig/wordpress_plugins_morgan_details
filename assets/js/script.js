@@ -16,6 +16,10 @@
         const notificar = document.querySelector(".notificar");
         const body = document.querySelector(".msg_card_body");
 
+        const burbuja_chat = document.querySelector(".chatGrupal");
+        const chat_grupal = document.querySelector("#chat_grupal");
+        const cerrar_chat_grupal = document.querySelector(".cerrar_chat_grupal");
+
         $("#action_menu_btn").click(function() {
             $(".action_menu").toggle();
         });
@@ -118,6 +122,17 @@
             clearInterval(buscarMensaje);
         });
 
+        burbuja_chat.addEventListener("click", function() {
+            this.classList.add("d-none");
+            chat_grupal.classList.remove("d-none");
+            chat_grupal_user();
+        });
+
+        cerrar_chat_grupal.addEventListener("click", function() {
+            burbuja_chat.classList.remove("d-none");
+            chat_grupal.classList.add("d-none");
+        });
+
         function chat_mensaje(dato) {
             let data = new FormData();
             let activo;
@@ -177,6 +192,46 @@
 									${data.mensaje}
 									<span class="msg_time">${data.fecha}</span>
 								</div>
+							</div>`;
+
+            return mensaje;
+        }
+
+        function chat_grupal_user() {
+            let data = new FormData();
+
+            data.append("action", "ajax_busqueda");
+            data.append("abrir_chat_grupal", 1);
+
+            fetch(busqueda_vars.ajaxurl, {
+                    method: "POST",
+                    body: data,
+                })
+                .then((response) => response.json())
+                .then((response) => {
+                    console.log(response);
+                    body_msj.innerHTML = "";
+
+                    response.map((data) => {
+                        let datos = {
+                            name: data.display_name,
+                            id_user: data.id_user,
+                            id_post: data.id_post,
+                        };
+
+                        let cuerpo = cuerpo_mensaje_grupal(datos);
+                        $(".msg_card_body").append(cuerpo);
+                    });
+                })
+                .catch((err) => console.log(err));
+        }
+
+        function cuerpo_mensaje_grupal(data) {
+            let mensaje = `<div class="d-flex justify-content-start mb-4">
+			    <div class="img_cont_msg">
+				    <a href="#" class="user_grupal" id_user="${data.id_user}" id_post="${data.id_post}"><i class="fas fa-user-circle" style="font-size: 3rem"></i></a>
+								</div>
+								<div class="msg_cotainer"><a href="#" class="user_grupal" id_user="${data.id_user}" id_post="${data.id_post}">${data.name}</a></div>
 							</div>`;
 
             return mensaje;

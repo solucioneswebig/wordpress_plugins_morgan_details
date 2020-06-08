@@ -37,6 +37,14 @@ if(isset($_POST["chat_mensaje"])){
 
 	echo json_encode($contar_mensajes);
 
+}else if(isset($_POST["abrir_chat_grupal"])){
+
+	$mostrar_usuario = $wpdb->get_results("SELECT * FROM ".TABLA_DATOS_PROPUESTAS." as propuesta 
+														LEFT JOIN ".TABLA_DATOS_USER." as user ON user.ID = propuesta.id_user
+														GROUP BY propuesta.id_user ");
+
+	echo json_encode($mostrar_usuario);
+
 }
 
 

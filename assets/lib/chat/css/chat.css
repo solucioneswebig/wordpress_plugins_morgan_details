@@ -24,6 +24,7 @@
 
 .msg_card_body {
     overflow-y: auto;
+    max-height: 300px;
 }
 
 .card-chat .card-header {
@@ -258,4 +259,24 @@
     .contacts_card {
         margin-bottom: 15px !important;
     }
+}
+
+
+/* Chat Grupal */
+
+.chatGrupal {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 15px;
+    right: 40px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

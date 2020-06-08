@@ -62,6 +62,7 @@ define('PLUGIN_BASE_DIR', dirname(__FILE__));
 define('TABLA_DATOS_EXTRA_USUARIO' , $wpdb->prefix . $prefix_plugin_gn . 'datos_usuario_extra');
 define('TABLA_DATOS_PROPUESTAS' , $wpdb->prefix . $prefix_plugin_gn . 'datos_propuestas');
 define('TABLA_DATOS_CHAT' , $wpdb->prefix . $prefix_plugin_gn . 'datos_chat');
+define('TABLA_DATOS_USER' , $wpdb->prefix .  'users');
 
 
 
@@ -89,6 +90,10 @@ function design_styles_pets(){
 	wp_enqueue_script( 'datatable-public-responsive-js','https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js', array('jquery'), null, true );
 
 	wp_enqueue_script( 'sweet-alert','https://cdn.jsdelivr.net/npm/sweetalert2@8', array('jquery'), null, true );
+
+	wp_enqueue_script( 'fontawesome','https://kit.fontawesome.com/36226558a5.js', array(''), null, true );
+
+	
 
 	wp_enqueue_script( 'mtb-scripts-general', GP_PLUGIN_DIR_URL . 'assets/js/script.js' , array( 'jquery' ), null , false );
 
