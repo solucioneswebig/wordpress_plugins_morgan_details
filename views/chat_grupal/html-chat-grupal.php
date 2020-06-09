@@ -7,7 +7,7 @@
 <div class="container-fluid d-none posision-chat" id="chat_grupal">
   <div class="row justify-content-center">
     
-    <div class="chat posicion-caja">
+    <div class="chat posicion-caja-grupal">
       <div class="card">
         <div class="card-header msg_head">
           <div class="d-flex bd-highlight justify-content-between">
@@ -38,7 +38,7 @@
             </ul>
           </div> -->
         </div>
-        <div class="card-body msg_card_body">
+        <div class="card-body msg_card_body_grupal">
           
           
         </div>
@@ -47,7 +47,7 @@
             <!-- <textarea name="" class="form-control type_msg" placeholder="Buscar"></textarea> -->
             <input type="text" class="form-control" placeholder="Buscar Clientes">
             <div class="input-group-append">
-              <span class="input-group-text send_btn" id-post="" id-user="" id-cliente=""><i class="fas fa-location-arrow"></i></span>
+              <span class="input-group-text send_btn" id-post="" id-user="<?php echo $cu->ID; ?>" id-cliente=""><i class="fas fa-location-arrow"></i></span>
             </div>
           </div>
         </div>

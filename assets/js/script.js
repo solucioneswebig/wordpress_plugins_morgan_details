@@ -133,6 +133,24 @@
             chat_grupal.classList.add("d-none");
         });
 
+        $(document).on("click", ".user_grupal", function() {
+            chat.classList.remove("d-none");
+
+            id_user = this.getAttribute("id_user");
+            id_post = this.getAttribute("id_post");
+            id_cliente = this.getAttribute("id_cliente");
+            id_envio = id_user;
+
+            let data = {
+                id_cliente,
+                id_user,
+                id_post,
+                id_envio,
+            };
+            console.log(data);
+            chat_mensaje(data);
+        });
+
         function chat_mensaje(dato) {
             let data = new FormData();
             let activo;
@@ -199,8 +217,10 @@
 
         function chat_grupal_user() {
             let data = new FormData();
+            let id_user = notificar.getAttribute("id-cliente");
 
             data.append("action", "ajax_busqueda");
+            data.append("id_user", id_user);
             data.append("abrir_chat_grupal", 1);
 
             fetch(busqueda_vars.ajaxurl, {
@@ -209,7 +229,7 @@
                 })
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log(response);
+                    // console.log(response);
                     body_msj.innerHTML = "";
 
                     response.map((data) => {
@@ -220,18 +240,20 @@
                         };
 
                         let cuerpo = cuerpo_mensaje_grupal(datos);
-                        $(".msg_card_body").append(cuerpo);
+                        $(".msg_card_body_grupal").append(cuerpo);
                     });
                 })
                 .catch((err) => console.log(err));
         }
 
         function cuerpo_mensaje_grupal(data) {
+            let id_user = notificar.getAttribute("id-cliente");
+
             let mensaje = `<div class="d-flex justify-content-start mb-4">
 			    <div class="img_cont_msg">
-				    <a href="#" class="user_grupal" id_user="${data.id_user}" id_post="${data.id_post}"><i class="fas fa-user-circle" style="font-size: 3rem"></i></a>
+				    <a href="#" class="user_grupal" id_user="${id_user}" id_cliente="${data.id_user}" id_post="${data.id_post}"><i class="fas fa-user-circle" style="font-size: 3rem"></i></a>
 								</div>
-								<div class="msg_cotainer"><a href="#" class="user_grupal" id_user="${data.id_user}" id_post="${data.id_post}">${data.name}</a></div>
+								<div class="msg_cotainer"><a href="#" class="user_grupal" id_user="${id_user}" id_cliente="${data.id_user}" id_post="${data.id_post}">${data.name}</a></div>
 							</div>`;
 
             return mensaje;

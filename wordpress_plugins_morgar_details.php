@@ -63,6 +63,7 @@ define('TABLA_DATOS_EXTRA_USUARIO' , $wpdb->prefix . $prefix_plugin_gn . 'datos_
 define('TABLA_DATOS_PROPUESTAS' , $wpdb->prefix . $prefix_plugin_gn . 'datos_propuestas');
 define('TABLA_DATOS_CHAT' , $wpdb->prefix . $prefix_plugin_gn . 'datos_chat');
 define('TABLA_DATOS_USER' , $wpdb->prefix .  'users');
+define('TABLA_DATOS_POST' , $wpdb->prefix .  'posts');
 
 
 

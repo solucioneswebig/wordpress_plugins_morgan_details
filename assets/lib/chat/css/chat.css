@@ -1,8 +1,13 @@
-.posicion-caja {
+.posicion-caja,
+.posicion-caja-grupal {
     position: fixed;
     bottom: 3px;
     right: 1px;
     width: 30%;
+}
+
+.posicion-caja {
+    right: 30.3%;
 }
 
 .chat {
@@ -22,7 +27,8 @@
     white-space: nowrap;
 }
 
-.msg_card_body {
+.msg_card_body,
+.msg_card_body_grupal {
     overflow-y: auto;
     max-height: 300px;
 }
