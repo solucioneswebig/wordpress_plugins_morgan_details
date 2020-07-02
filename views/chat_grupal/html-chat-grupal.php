@@ -1,4 +1,4 @@
-<a href="#" class="chatGrupal"><i class="fas fa-comment-alt"></i></a>
+<a class="chatGrupal"><i class="fas fa-comment-alt mr-3"></i> <span class="">Conversaciones</span></a>
 <?php
 
   $cu = wp_get_current_user(); 

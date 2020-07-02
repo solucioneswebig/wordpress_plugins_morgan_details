@@ -1,9 +1,9 @@
-.posicion-caja,
-.posicion-caja-grupal {
+.posicion-caja, .posicion-caja-grupal {
     position: fixed;
     bottom: 3px;
     right: 1px;
     width: 30%;
+    z-index: 9999;
 }
 
 .posicion-caja {
@@ -272,17 +272,17 @@
 
 .chatGrupal {
     position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 15px;
+    bottom: 0px;
     right: 40px;
     background-color: #007bff;
-    color: #fff;
-    border-radius: 50px;
+    color: #fff !important;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 3px 25px;
+    cursor: pointer;
+    box-shadow: 1px 2px 6px #333;
 }

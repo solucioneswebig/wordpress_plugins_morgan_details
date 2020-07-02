@@ -84,10 +84,18 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
 
     }elseif(isset($_GET["slug"]) && $_GET["slug"] == "mis_finanzas"){
 
-        echo '<h1>Mis finanzas</h1>';
+        //echo '<h1>Mis finanzas</h1>';
 
 
         include "front-page-post/finanzas.php";
+
+        
+    }elseif(isset($_GET["slug"]) && $_GET["slug"] == "cargar_saldo"){
+
+        //echo '<h1>Mis finanzas</h1>';
+
+
+        include "front-page-post/add_money.php";
 
         
     }elseif(isset($_GET["slug"]) && $_GET["slug"] == "editar_perfil"){
