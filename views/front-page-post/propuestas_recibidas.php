@@ -20,6 +20,7 @@ $recibidos = 0;
         <th>Trabajo</th>
         <th>Participante</th>
         <th>Descripcion Propuesta</th>
+        <th>Monto</th>
         <th>Messaje</th>
     </tr>
 </thead>
@@ -43,7 +44,10 @@ foreach($post_autor as $key => $post):
            echo $datos_usuario->nombres_usuario." ".$datos_usuario->apellidos_usuario; 
        }
         ?></td>
-       <td><?php echo $post->post_title; ?></td>
+       <td><?php echo $propuesta->descripcion_propuesta; ?></td>
+
+
+       <td><?php echo $propuesta->valor_propuesta; ?></td>
        <td><button type="button" class="btn btn-propuesta messenger" id-user="<?php echo get_current_user_id(); ?>" id-post="<?php echo $post->ID ?>" id-cliente="<?php echo $propuesta->id_user; ?>" id_enviado="<?php echo get_current_user_id() ?>">Enviar Mensaje</button> </td>
     </tr>
 <?php
