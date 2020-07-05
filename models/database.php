@@ -103,7 +103,7 @@ function gn_database(){
     )$charset_collate;";   
     
     
-    $datos_extras_usuario = "CREATE TABLE IF NOT EXISTS " . TABLA_DATOS_SALDO . " (
+    $datos_saldo = "CREATE TABLE IF NOT EXISTS " . TABLA_DATOS_SALDO . " (
 
         id_saldo bigint(20) NOT NULL AUTO_INCREMENT,
 
@@ -120,7 +120,7 @@ function gn_database(){
     )$charset_collate;"; 
     
     
-    $datos_extras_usuario = "CREATE TABLE IF NOT EXISTS " . TABLA_DATOS_TRANSACCIONES . " (
+    $datos_transacciones = "CREATE TABLE IF NOT EXISTS " . TABLA_DATOS_TRANSACCIONES . " (
 
         id_transaccion bigint(20) NOT NULL AUTO_INCREMENT,
 
@@ -150,6 +150,9 @@ function gn_database(){
 
 
     dbDelta($datos_extras_usuario);
+    dbDelta($datos_transacciones);
+    dbDelta($datos_saldo);
+     
 
 
 
