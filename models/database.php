@@ -82,7 +82,69 @@ function gn_database(){
         PRIMARY KEY (id_chat)
 
     )$charset_collate;";
+
+
+    $datos_extras_usuario = "CREATE TABLE IF NOT EXISTS " . TABLA_DATOS_CHAT . " (
+
+        id_chat bigint(20) NOT NULL AUTO_INCREMENT,
+
+        id_user int(20) NOT NULL,
+
+        id_cliente int(20) NOT NULL,
+
+        id_post int(20) NOT NULL,
+
+        mensaje longtext NOT NULL,
+
+        fecha timestamp NOT NULL,
+
+        PRIMARY KEY (id_chat)
+
+    )$charset_collate;";   
+    
+    
+    $datos_extras_usuario = "CREATE TABLE IF NOT EXISTS " . TABLA_DATOS_SALDO . " (
+
+        id_saldo bigint(20) NOT NULL AUTO_INCREMENT,
+
+        id_user int(20) NOT NULL,
+
+        saldo longtext NOT NULL,
+
+        fecha_registro timestamp NOT NULL,
+
+        fecha_actualizacion timestamp NOT NULL,
+
+        PRIMARY KEY (id_saldo)
+
+    )$charset_collate;"; 
+    
+    
+    $datos_extras_usuario = "CREATE TABLE IF NOT EXISTS " . TABLA_DATOS_TRANSACCIONES . " (
+
+        id_transaccion bigint(20) NOT NULL AUTO_INCREMENT,
+
+        id_user int(20) NOT NULL,
+
+        monto_transaccion longtext NOT NULL,
+
+        debito_credito int(20) NOT NULL,
+
+        metodo_transaccion int(20) NOT NULL,
+
+        referencia longtext NOT NULL,
+
+        fecha timestamp NOT NULL,
+
+        estatus int(20) NOT NULL,
+
+        PRIMARY KEY (id_transaccion)
+
+    )$charset_collate;";     
   
+
+    
+
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 

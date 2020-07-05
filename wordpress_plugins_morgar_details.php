@@ -62,6 +62,9 @@ define('PLUGIN_BASE_DIR', dirname(__FILE__));
 define('TABLA_DATOS_EXTRA_USUARIO' , $wpdb->prefix . $prefix_plugin_gn . 'datos_usuario_extra');
 define('TABLA_DATOS_PROPUESTAS' , $wpdb->prefix . $prefix_plugin_gn . 'datos_propuestas');
 define('TABLA_DATOS_CHAT' , $wpdb->prefix . $prefix_plugin_gn . 'datos_chat');
+define('TABLA_DATOS_SALDO' , $wpdb->prefix . $prefix_plugin_gn . 'datos_saldo');
+define('TABLA_DATOS_TRANSACCIONES' , $wpdb->prefix . $prefix_plugin_gn . 'datos_transacciones');
+
 define('TABLA_DATOS_USER' , $wpdb->prefix .  'users');
 define('TABLA_DATOS_POST' , $wpdb->prefix .  'posts');
 

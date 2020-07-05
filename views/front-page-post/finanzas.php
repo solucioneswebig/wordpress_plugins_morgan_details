@@ -18,13 +18,13 @@ $id = $user->ID;
 
     <div class="row mb-5">
         <div class="col-md-2">
-        <p class="mb-0">Disponible</p> <span class="d-inline-block badge badge-success"><h4>$ 25.00</h4></span>
+        <p class="mb-0">Disponible</p> <span class="d-inline-block badge badge-success"><h4>$ <?php echo $saldo; ?></h4></span>
         </div>
         <div class="col-md-2">
-        <p class="mb-0">Trabajando</p> <span class="d-inline-block badge badge-info"><h4>$ 00.00</h4></span>
+        <p class="mb-0">Trabajando</p> <span class="d-inline-block badge badge-info"><h4>$ <?php echo $saldo_trabajando; ?></h4></span>
         </div>         
         <div class="col-md-2">
-        <p class="mb-0">Pendiente</p> <span class="d-inline-block badge badge-warning"><h4>$ 00.00</h4></span>
+        <p class="mb-0">Pendiente</p> <span class="d-inline-block badge badge-warning"><h4>$ <?php echo $saldo_pendiente; ?></h4></span>
         </div>  
                
     </div>
@@ -41,19 +41,40 @@ $id = $user->ID;
                         <th>Metodo</th>
                         <th>Tipo transaccion</th>
                         <th>fecha</th>
+                        <th>Estatus</th>
                     </tr>
                 </thead>     
 
                 <tbody>
+                <?php
+                $i = 1;
+
+                    $buscar_transacciones = $wpdb->get_results("SELECT * FROM ".TABLA_DATOS_TRANSACCIONES." WHERE  id_user = ".$id.""); 
+
+
+
+                    foreach($buscar_transacciones as $key_2 => $transaccion):
                 
+                ?>
                     <tr>
-                        <td>1</td>
-                        <td>$ 25.00</td>
-                        <td>Transferencia</td>
+                        <td><?php echo $id; ?></td>
+                        <td><?php echo $transaccion->monto_transaccion; ?></td>
+                        <td><?php echo $transaccion->metodo_transaccion; ?></td>
                         <td>Recarga</td>
-                        <td>26/06/2020</td>
+                        <td><?php echo $transaccion->fecha; ?></td>
+                        <td><?php 
+                        
+                        if($transaccion->estatus == 0){
+                            echo '<span class="badge badge-warning">Pendiente</span>';
+                        }elseif($transaccion->estatus == 1){
+                            echo '<span class="badge badge-success">Aprobado</span>';
+                        }else{
+                            echo '<span class="badge badge-danger">Cancelado</span>';
+                        }
+
+                        ?></td>
                     </tr>
-                
+                <?php endforeach; ?>
                 </tbody>       
             </table>
         </div>
