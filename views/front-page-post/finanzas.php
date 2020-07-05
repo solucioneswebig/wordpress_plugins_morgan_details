@@ -3,7 +3,12 @@
 $user = wp_get_current_user();
 $id = $user->ID;
 
-
+$metodos = [
+    '0' => "Transferencia Bancaria",
+    '1' => "Deposito en efectivo",
+    '2' => "Mercado Pago",
+    '3' => "PayPal"
+];
 
 ?>
 
@@ -58,8 +63,8 @@ $id = $user->ID;
                 ?>
                     <tr>
                         <td><?php echo $id; ?></td>
-                        <td><?php echo $transaccion->monto_transaccion; ?></td>
-                        <td><?php echo $transaccion->metodo_transaccion; ?></td>
+                        <td>$ <?php echo number_format($transaccion->monto_transaccion, 2, ',', '.'); ?></td>
+                        <td><?php echo $metodos[$transaccion->metodo_transaccion]; ?></td>
                         <td>Recarga</td>
                         <td><?php echo $transaccion->fecha; ?></td>
                         <td><?php 
