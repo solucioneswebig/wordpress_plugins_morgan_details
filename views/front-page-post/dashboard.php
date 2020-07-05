@@ -37,37 +37,37 @@ foreach($post_autor as $key => $value){
             </div>
     </div>
     <div class="row">
-            <div class="col-md-3">
-                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                <div class="card-header">Publicados</div>
+            <div class="col-md-6">
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card-header">Saldo disponible</div>
+                <div class="card-body text-center">
+                <h3 class="card-title">$ <?php echo $saldo; ?></h3>
+                </div>
+                </div>            
+            </div>    
+            <div class="col-md-6">
+                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <div class="card-header">Servicios publicados</div>
                 <div class="card-body text-center">
                     <h3 class="card-title"><?php echo count($post_autor); ?></h3>
                 </div>
                 </div>                
             </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">Enviadas</div>
+            <div class="col-md-6">
+                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                <div class="card-header">Propuestas enviadas</div>
                 <div class="card-body text-center">
                 <h3 class="card-title"><?php echo count($buscar_propuesta); ?></h3>
                 </div>
                 </div>            
             </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-                <div class="card-header">Recibidas</div>
+            <div class="col-md-6">
+                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                <div class="card-header">Propuestas recibidas</div>
                 <div class="card-body text-center">
                 <h3 class="card-title"><?php echo $recibidos; ?></h3>
                 </div>
                 </div>             
-            </div>
-            <div class="col-md-3">
-            <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-                <div class="card-header">Saldo</div>
-                <div class="card-body text-center">
-                <h3 class="card-title">$ 0.00</h3>
-                </div>
-                </div>            
             </div>
     </div>
 </div>
