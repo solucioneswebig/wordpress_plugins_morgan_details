@@ -10,6 +10,7 @@ if(isset($_POST["cargar_saldo"])){
      *  DEBITO CREDITO
      *  0 = Debito
      *  1 = Acreditar
+     *  2 = Trabajo en Ejecucion
      * 
      *  METODO DE TRANSACCION
      *  <option value="0">Transferencia Bancaria</option>
@@ -112,7 +113,7 @@ if(isset($_POST["cargar_saldo"])){
     <hr>
     <div class="row">
         <div class="col-md-12">
-            <div class="mensaje"></div>
+            <a class="btn btn-success" href="<?php echo $url; ?>?slug=mis_finanzas"><i class="fa fa-undo"></i> Volver a finanzas</a>
         </div>
     </div>    
 </div>

@@ -53,20 +53,30 @@ function wds_do_frontend_form_submission_shortcode( $atts = array() ) {
     $obtener_saldo = $wpdb->get_row("SELECT saldo FROM ".TABLA_DATOS_SALDO." WHERE  id_user = ".$id."");
 
     if($obtener_saldo){
-        $saldo = $obtener_saldo->saldo;
+        $saldo = number_format($obtener_saldo->saldo, 2, ',', '.');
     }else{
-        $saldo = "0.00";
+        $saldo = "0,00";
     }
 
     $obtener_saldo_pendiente = $wpdb->get_row("SELECT SUM(monto_transaccion) as total FROM ".TABLA_DATOS_TRANSACCIONES." WHERE  id_user = ".$id." and debito_credito = 1 and estatus = 0");
 
-    if($obtener_saldo_pendiente){
-        $saldo_pendiente = $obtener_saldo_pendiente->total;
+    if($obtener_saldo_pendiente->total != NULL){
+        $saldo_pendiente = number_format($obtener_saldo_pendiente->total, 2, ',', '.');
     }else{
-        $saldo_pendiente = "0.00";
+        $saldo_pendiente = "0,00";
     }
 
-    $saldo_trabajando = "0.00";
+
+    $obtener_saldo_trabajando = $wpdb->get_row("SELECT SUM(monto_transaccion) as total FROM ".TABLA_DATOS_TRANSACCIONES." WHERE  id_user = ".$id." and debito_credito = 2 and estatus = 0");
+
+
+
+    if($obtener_saldo_trabajando->total != NULL){
+        $saldo_trabajando = number_format($obtener_saldo_trabajando->total, 2, ',', '.');
+    }else{
+        $saldo_trabajando = "0,00";
+    }
+   
 
 
     $atts = shortcode_atts( array(
